@@ -17,12 +17,17 @@ module.exports = {
           '192-100-67': 'hsl(192, 100%, 67%)',
           '280-87-65': 'hsl(280, 87%, 65%)',
           '--Very-Dark-Desaturated-Blue': 'hsl(235, 24%, 19%)',
-          '--dark-greyish-blue': 'hsl(234, 11%, 52%)'
+          '--dark-greyish-blue': 'hsl(234, 11%, 52%)',
+          '--Very-Dark-Blue': 'hsl(235, 21%, 11%)',
+          '--Very-Dark-Grayish-Blue': 'hsl(237, 14%, 26%)'
         },
 
       },
       fontFamily: {
         'josefin-sans': ['Josefin Sans', 'sans-serif'],
+      },
+      minHeight: {
+        '30rem': '60vh',
       }
     },
   },
