@@ -3,10 +3,27 @@ import checked from '../images/icon-check.svg';
 import cross from '../images/icon-cross.svg';
 import { useTheme } from '../context/themeContext'
 
-function TodoList({ list, setTodoList }) {
+
+function TodoList({ list, setTodoList, onTodoDrag }) {
     const [checkedItems, setCheckedItems] = useState([]);
     const [filter, setFilter] = useState('all');
-    const { theme, toggleTheme } = useTheme();
+    const { theme } = useTheme();
+
+    // DRAG AND DROP LOGIC
+    const handleDragStart = (e, index) => {
+        e.dataTransfer.setData('text/plain', index.toString());
+    };
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+    };
+
+    const handleDrop = (e, targetIndex) => {
+        e.preventDefault();
+        const sourceIndex = parseInt(e.dataTransfer.getData('text/plain'));
+        onTodoDrag(sourceIndex, targetIndex);
+    };
+    // *************
 
 
     const handleCheckTodo = (index) => {
@@ -77,7 +94,10 @@ function TodoList({ list, setTodoList }) {
                                     <img src={checked} alt="checked" />
                                 </div>
                             )}
-                            <li className={`${theme ? 'bg-hsl---Very-Dark-Desaturated-Blue' : 'bg-hsl---Light-input-color text-hsl---VeryDarkGrayishBlue'} py-5 border-b border-hsl---Very-Dark-Grayish-Blue pl-16 flex items-center justify-between pr-4  ${index === 0 ? 'rounded-t-lg' : ''} text-sm sm:text-lg`} >
+                            <li className={`${theme ? 'bg-hsl---Very-Dark-Desaturated-Blue' : 'bg-hsl---Light-input-color text-hsl---VeryDarkGrayishBlue'} py-5 border-b border-hsl---Very-Dark-Grayish-Blue pl-16 flex items-center justify-between pr-4  ${index === 0 ? 'rounded-t-lg' : ''} text-sm sm:text-lg cursor-pointer`} draggable
+                                onDragStart={(e) => handleDragStart(e, index)}
+                                onDragOver={handleDragOver}
+                                onDrop={(e) => handleDrop(e, index)}>
                                 <span className={isDone ? 'line-through decoration-1 text-hsl---dark-greyish-blue' : ''}>{todo}</span>
                                 <img src={cross} alt="delete icon" className="cursor-pointer" onClick={() => handleTodoDelete(index)} />
                             </li>
@@ -105,3 +125,5 @@ function TodoList({ list, setTodoList }) {
 }
 
 export default TodoList;
+
+

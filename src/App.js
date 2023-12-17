@@ -23,11 +23,17 @@ function App() {
 
   const handleAddTodo = (e) => {
     if (e.key === "Enter") {
-      console.log(todoList, inputValue, isChecked);
       setTodoList([...todoList, inputValue])
       setInputValue('');
     }
   }
+
+  const handleTodoDrag = (sourceIndex, targetIndex) => {
+    const updatedTodos = [...todoList];
+    const [draggedTodo] = updatedTodos.splice(sourceIndex, 1);
+    updatedTodos.splice(targetIndex, 0, draggedTodo);
+    setTodoList(updatedTodos);
+  };
 
   return (
     <>
@@ -48,7 +54,7 @@ function App() {
           </div>
         </div>
       </div>
-      <TodoList list={todoList} setTodoList={setTodoList} />
+      <TodoList list={todoList} setTodoList={setTodoList} onTodoDrag={handleTodoDrag} />
     </>
   );
 }
