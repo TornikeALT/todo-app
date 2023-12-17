@@ -23,6 +23,7 @@ function App() {
 
   const handleAddTodo = (e) => {
     if (e.key === "Enter") {
+      console.log(todoList, inputValue, isChecked);
       setTodoList([...todoList, inputValue])
       setInputValue('');
     }
@@ -30,8 +31,8 @@ function App() {
 
   return (
     <>
-      <div className={`container mx-auto max-w-90-rem h-72 flex justify-center px-3 font-josefin-sans ${theme ? 'bg-bg-dark' : 'bg-bg-light'}`}>
-        <div className='max-w-lg w-full flex flex-col pt-16'>
+      <div className={`container mx-auto max-w-90-rem h-72 flex justify-center font-josefin-sans ${theme ? 'bg-bg-dark' : 'bg-bg-light'}`}>
+        <div className='max-w-lg w-full flex flex-col pt-16 px-6'>
           <div className='flex justify-between items-center'>
             <h1 className='text-white text-4xl font-bold tracking-spacing-1rem'>TODO</h1>
             {!theme && <img src={moon} alt="moon" onClick={toggleTheme} className='cursor-pointer' />}
@@ -43,7 +44,7 @@ function App() {
               <div className='absolute bottom-5 left-4 w-7 h-7 z-20 rounded-2xl flex items-center justify-center bg-gradient-to-r from-hsl-192-100-67 to-hsl-280-87-65 cursor-pointer' onClick={handleCheckTodo}>
                 <img src={checked} alt="cheked" />
               </div>}
-            <input type="text" className={`w-full mt-9 py-5 pl-16 ${theme ? ' bg-hsl---Very-Dark-Desaturated-Blue  text-white' : 'bg-hsl---Light-input-color text-hsl---VeryDarkGrayishBlue'} rounded-lg caret-blue-200`} placeholder='Create a new todo...' value={inputValue} onChange={handleInputValue} onKeyDown={handleAddTodo} />
+            <input type="text" className={`text-sm sm:text-lg w-full mt-9 py-5 pl-16 ${theme ? ' bg-hsl---Very-Dark-Desaturated-Blue  text-white' : 'bg-hsl---Light-input-color text-hsl---VeryDarkGrayishBlue'} rounded-lg caret-blue-200`} placeholder='Create a new todo...' value={inputValue} onChange={handleInputValue} onKeyDown={handleAddTodo} />
           </div>
         </div>
       </div>

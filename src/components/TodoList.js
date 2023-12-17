@@ -8,6 +8,7 @@ function TodoList({ list, setTodoList }) {
     const [filter, setFilter] = useState('all');
     const { theme, toggleTheme } = useTheme();
 
+
     const handleCheckTodo = (index) => {
         setCheckedItems((prevCheckedItems) => {
             const updatedCheckedItems = [...prevCheckedItems];
@@ -59,7 +60,7 @@ function TodoList({ list, setTodoList }) {
 
     return (
         <div className={`container max-w-90-rem mx-auto ${theme ? 'bg-hsl---Very-Dark-Blue' : 'bg-hsl---VeryLightGrayishBlue'} text-white flex flex-col items-center font-josefin-sans min-h-75vh relative`}>
-            <div className="max-w-lg w-full absolute -top-16">
+            <div className="max-w-lg w-full absolute -top-16 px-6">
                 {filteredList.map((todo, index) => {
                     const isDone = checkedItems[list.indexOf(todo)];
                     return (
@@ -76,19 +77,19 @@ function TodoList({ list, setTodoList }) {
                                     <img src={checked} alt="checked" />
                                 </div>
                             )}
-                            <li className={`${theme ? 'bg-hsl---Very-Dark-Desaturated-Blue' : 'bg-hsl---Light-input-color text-hsl---VeryDarkGrayishBlue'} py-5 border-b border-hsl---Very-Dark-Grayish-Blue pl-16 flex items-center justify-between pr-4  ${index === 0 ? 'rounded-t-lg' : ''}`}>
+                            <li className={`${theme ? 'bg-hsl---Very-Dark-Desaturated-Blue' : 'bg-hsl---Light-input-color text-hsl---VeryDarkGrayishBlue'} py-5 border-b border-hsl---Very-Dark-Grayish-Blue pl-16 flex items-center justify-between pr-4  ${index === 0 ? 'rounded-t-lg' : ''} text-sm sm:text-lg`} >
                                 <span className={isDone ? 'line-through decoration-1 text-hsl---dark-greyish-blue' : ''}>{todo}</span>
                                 <img src={cross} alt="delete icon" className="cursor-pointer" onClick={() => handleTodoDelete(index)} />
                             </li>
                         </div>
                     );
                 })}
-                <div className={`flex justify-between  max-w-lg w-full px-6 text-sm ${theme ? 'bg-hsl---Very-Dark-Desaturated-Blue' : 'bg-hsl---Light-input-color'} py-5 text-hsl---dark-greyish-blue rounded-b-lg`}>
+                <div className={`flex justify-between  max-w-lg w-full px-6 text-sm ${theme ? 'bg-hsl---Very-Dark-Desaturated-Blue' : 'bg-hsl---Light-input-color'} py-5 text-hsl---dark-greyish-blue rounded-b-lg relative`}>
                     <div className="flex gap-1">
                         <span>{list.length} </span>
                         <h3>Items Left</h3>
                     </div>
-                    <div className="flex gap-2">
+                    <div className={`flex gap-2 absolute sm:relative sm:-bottom-0 w-full sm:w-auto -bottom-20 justify-center py-5 -ml-6 sm:py-0 rounded-lg sm:rounded-none ${theme ? 'bg-hsl---Very-Dark-Desaturated-Blue' : 'bg-hsl---Light-input-color '}`}>
                         <span className={`${filter === 'all' ? 'text-blue-500' : ''} ${theme ? 'hover:text-white' : 'hover:text-black'} font-bold cursor-pointer`} onClick={() => handleFilterChange('all')}>All</span>
                         <span className={`${filter === 'active' ? 'text-blue-500' : ''} ${theme ? 'hover:text-white' : 'hover:text-black'} font-bold cursor-pointer`} onClick={() => handleFilterChange('active')}>Active</span>
                         <span className={`${filter === 'completed' ? 'text-blue-500' : ''} ${theme ? 'hover:text-white' : 'hover:text-black'} font-bold cursor-pointer`} onClick={() => handleFilterChange('completed')}>Completed</span>
@@ -97,7 +98,7 @@ function TodoList({ list, setTodoList }) {
                         <span className={`${theme ? 'hover:text-white' : 'hover:text-black'} cursor-pointer`} onClick={handleDeleteCompleted}>Clear Completed</span>
                     </div>
                 </div>
-                <h4 className="text-center mt-16 text-sm text-hsl---dark-greyish-blue">Drag and drop to reorder list</h4>
+                <h4 className="text-center sm:mt-16 text-sm text-hsl---dark-greyish-blue mt-32">Drag and drop to reorder list</h4>
             </div>
         </div >
     );
